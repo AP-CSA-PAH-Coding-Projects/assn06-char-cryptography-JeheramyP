@@ -1,0 +1,2 @@
+**Overview**
+This project is a Java implementation of a C-style string class. CString stores a string like "hello" as an array of characters, e.g. ['h', 'e', 'l', 'l', 'o']. A CString object can be reversed or sorted alphabetically.
