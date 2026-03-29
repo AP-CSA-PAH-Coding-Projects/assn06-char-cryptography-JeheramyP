@@ -9,8 +9,19 @@ public class CString {
         string = s.toCharArray();
     }
 
-    public char get(int i) {
-        return string[i];
+    public CString(char[] arr) {
+        string = arr;
+    }
+
+    public CString(int[] nums) {
+        string = new char[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            string[i] = (char) nums[i];
+        }
+    }
+
+    public char[] get() {
+        return string;
     }
 
     public int length() {
@@ -38,5 +49,22 @@ public class CString {
             string[minI] = temp;
         }
         
+    }
+
+    public void sortDescending() {
+        for (int i = 1; i < string.length; i++) {
+            char curr = string[i];
+            int j = i - 1;
+            while (j >= 0 && string[j] < curr) {
+                string[j+1] = string[j];
+                j--;
+            }
+            string[j+1] = curr;
+        }
+        
+    }
+
+    public String toString() {
+        return new String(string);
     }
 }
