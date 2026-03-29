@@ -65,28 +65,42 @@ public class CStringUtil {
     public static int[] memeifyArray(int[] nums) {
         int[] result = new int[nums.length];
         ArrayList<Integer> sevens = new ArrayList<>();
+        ArrayList<Integer> others = new ArrayList<>();
         for (int n : nums) {
             if (n == 7) {
                 sevens.add(n);
+            } else if (n != 6) {
+                others.add(n);
             }
         }
-        int index = 0;
+
+        // add 6 and 7s in the right place
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != 7) {
-                if (nums[i] == 6) {
-                    result[index++] = 6;
-                    result[index++] = 7;
-                } else {
-                    result[index++] = nums[i];
+            if (nums[i] == 6) {
+                result[i] = 6;
+                try {
+                    result[i+1] = sevens.remove(0);
+                } catch (Exception e) {
+                    // no more 7s, do nothing
                 }
                 
             }
         }
-        System.out.println(Arrays.toString(result));
+
+        // add back others
+        for (int i = 0; i < nums.length; i++) {
+            if (result[i] == 0) {
+                result[i] = others.remove(0);
+            }
+        }
+
         return result;
     }
 
     public static boolean nestedSequence(CString outer, CString inner) {
+        if (inner.get().length == 0) {
+            return true;
+        }
         outer.sortAscending();
         inner.sortAscending();
         int[] out = toNumerical(outer, 0);
