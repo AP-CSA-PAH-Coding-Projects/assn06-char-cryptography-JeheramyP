@@ -1,6 +1,7 @@
 package apcsa.githubtrack;
 
 import java.util.Arrays;
+import java.util.ArrayList;
 
 // Implement your CStringUtil class here
 
@@ -63,31 +64,25 @@ public class CStringUtil {
 
     public static int[] memeifyArray(int[] nums) {
         int[] result = new int[nums.length];
-        int num7s = 0;
+        ArrayList<Integer> sevens = new ArrayList<>();
         for (int n : nums) {
             if (n == 7) {
-                num7s++;
+                sevens.add(n);
             }
         }
+        int index = 0;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != 7) {
                 if (nums[i] == 6) {
-                    result[i] = nums[i];
-                    if (num7s > 0) {
-                        result[++i] = 7;
-                        num7s--;
-                    }
+                    result[index++] = 6;
+                    result[index++] = 7;
                 } else {
-                    result[i] = nums[i];
+                    result[index++] = nums[i];
                 }
                 
             }
         }
-        while (num7s > 0) {
-            result[result.length - num7s] = 7;
-            num7s--;
-        }
-
+        System.out.println(Arrays.toString(result));
         return result;
     }
 
